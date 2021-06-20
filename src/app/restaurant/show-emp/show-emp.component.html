@@ -45,19 +45,51 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th class="text-xl">Restaurant ID</th>
+      <th>
+        <div class="d-flex flex-row">
+          <input
+            [(ngModel)]="this.appliedFilters.CityName"
+            class="form-control"
+            (keyup)="refreshEmpList()"
+            placeholder="Filter"
+          />
+        </div>
+
+        City ID
+      </th>
+    </tr>
+  </thead>
+  <thead>
+    <tr>
+      <!-- <th class="text-xl">Restaurant ID</th> -->
       <th>Restaurant Name</th>
       <th>City</th>
-      <th>Date of Joining</th>
+      <!-- <th>Date of Joining</th> -->
+      <th>WiFi</th>
+      <th>Card Payment</th>
+      <th>Pet Friendly<input type="checkbox" [(ngModel)]="appliedFilters.petFriendly" (change)="refreshEmpList()" /></th>
+      <th>Music</th>
+      <th>Events</th>
+      <th>Delivery</th>
+      <th>Terrace</th>
+      <th>Booking</th>
       <th>Options</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let dataItem of RestaurantList">
-      <td>{{ dataItem.RestaurantId }}</td>
+      <!-- <td>{{ dataItem.RestaurantId }}</td> -->
       <td>{{ dataItem.RestaurantName }}</td>
       <td>{{ dataItem.City }}</td>
-      <td>{{ dataItem.DateOfJoining }}</td>
+      <!-- <td>{{ dataItem.DateOfJoining }}</td> -->
+      <td>{{ dataItem.WiFi }}</td>
+      <td>{{ dataItem.CardPayment }}</td>
+      <td>{{ dataItem.PetFriendly }}</td>
+      <td>{{ dataItem.Music }}</td>
+      <td>{{ dataItem.Events }}</td>
+      <td>{{ dataItem.Delivery }}</td>
+      <td>{{ dataItem.Terrace }}</td>
+      <td>{{ dataItem.Booking }}</td>
       <td>
         <button
           type="button"

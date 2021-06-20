@@ -1,40 +1,128 @@
 <div class="d-flex flex-row bd-highlight mb-3">
+  <div class="form-group row" style="width: 60%">
+    <label class="col-sm-2 col-form-label">Restaurant Name</label>
+    <div class="col-sm-10 mb-3">
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="RestaurantName"
+        placeholder="Enter Restaurant name"
+      />
+    </div>
 
-    <div class="form-froup row" style="width: 60%;">
-    
-        <label class="col-sm-2 col-form-label">Restaurant Name</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" [(ngModel)]="RestaurantName"
-            placeholder="Enter Restaurant name">
-        </div>
-    
-        <label class="col-sm-2 col-form-label">City</label>
-        <div class="col-sm-10">
-           <select class="form-control" [(ngModel)]="City">
-               <option>--Select--</option>
-               <option *ngFor="let depName of CityList">
-                   {{depName.CityName}}
-               </option>
-           </select>
-        </div>
-    
-        <label class="col-sm-2 col-form-label">Date of joining</label>
-        <div class="col-sm-10">
-            <input type="date"  [(ngModel)]="DateOfJoining">
-        </div>
-    
+    <label class="col-sm-2 col-form-label">WiFi Info</label>
+    <div class="col-sm-10 mb-3">
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="WiFi"
+        placeholder="WiFi info"
+      />
     </div>
-    <div class="ml-3 bd-highlight" style="width: 40%;">
-    <img [src]=PhotoFilePath height="250px;" width="200px;">
-    <input type="file" (change)="uploadPhoto($event)" class="mt-2"/>
+
+    <label class="col-sm-2 col-form-label">Card Payment</label>
+    <div class="col-sm-10 mb-3">
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="CardPayment"
+        placeholder="Card payment available?"
+      />
     </div>
+
+    <label class="col-sm-2 col-form-label">Pet Friendly</label>
+    <div class="col-sm-10 mb-3">
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="PetFriendly"
+        placeholder="Pet friendly?"
+      />
     </div>
-    
-    
-    <button (click)="addRestaurant()" *ngIf="emp.RestaurantId==0" class="btn btn-success">
-        Add
-    </button>
-    
-    <button (click)="updateRestaurant()" *ngIf="emp.RestaurantId!=0" class="btn btn-success">
-        Update
-    </button>
+
+    <label class="col-sm-2 col-form-label">Music</label>
+    <div class="col-sm-10 mb-3">
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="Music"
+        placeholder="What kind of music do they play?"
+      />
+    </div>
+
+    <label class="col-sm-2 col-form-label">Events</label>
+    <div class="col-sm-10 mb-3">
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="Events"
+        placeholder="What kind of events do they make?"
+      />
+    </div>
+
+    <label class="col-sm-2 col-form-label">Delivery</label>
+    <div class="col-sm-10 mb-3">
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="Delivery"
+        placeholder="Do they deliver food?"
+      />
+    </div>
+
+    <label class="col-sm-2 col-form-label">Terrace</label>
+    <div class="col-sm-10 mb-3">
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="Terrace"
+        placeholder="Do they have a terrace?"
+      />
+    </div>
+
+    <label class="col-sm-2 col-form-label">Booking</label>
+    <div class="col-sm-10 mb-3">
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="Booking"
+        placeholder="Booking info"
+      />
+    </div>
+
+    <label class="col-sm-2 col-form-label">City</label>
+    <div class="col-sm-10 mb-3">
+      <select class="form-control" [(ngModel)]="City">
+        <option>--Select--</option>
+        <option *ngFor="let depName of CityList">
+          {{ depName.CityName }}
+        </option>
+      </select>
+    </div>
+
+    <label class="col-sm-2 col-form-label">Date of joining</label>
+    <div class="col-sm-10 mb-3">
+      <input type="date" [(ngModel)]="DateOfJoining" />
+    </div>
+  </div>
+  <div class="ml-3 bd-highlight" style="width: 40%">
+    <img [src]="PhotoFilePath" height="250px;" width="300px;" />
+    <input type="file" (change)="uploadPhoto($event)" class="mt-2" />
+  </div>
+</div>
+
+<button
+  (click)="addRestaurant()"
+  *ngIf="emp.RestaurantId == 0"
+  class="btn btn-success"
+>
+  Add
+</button>
+
+<button
+  (click)="updateRestaurant()"
+  *ngIf="emp.RestaurantId != 0"
+  class="btn btn-success"
+>
+  Update
+</button>

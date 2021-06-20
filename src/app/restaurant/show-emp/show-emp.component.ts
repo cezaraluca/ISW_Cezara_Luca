@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {SharedService} from 'src/app/shared.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SharedService } from 'src/app/shared.service';
 
+
+interface IRetaurantFIlter { CityName?: string, petFriendly: boolean };
 @Component({
   selector: 'app-show-emp',
   templateUrl: './show-emp.component.html',
@@ -8,15 +11,23 @@ import {SharedService} from 'src/app/shared.service';
 })
 export class ShowEmpComponent implements OnInit {
 
-  constructor(private service:SharedService) { }
+  constructor(
+    private service:SharedService,
+    public activatedRoute: ActivatedRoute
+  ) { }
 
   RestaurantList:any=[];
+  _RestaurantList:any = [];
 
   ModalTitle:string;
   ActivateAddEditEmpComp:boolean=false;
   emp:any;
+  CityNameFilter:string="";
+  appliedFilters: IRetaurantFIlter;
 
   ngOnInit(): void {
+    console.log(this.activatedRoute.snapshot.params);
+    this.appliedFilters = { petFriendly: undefined, CityName: this?.activatedRoute?.snapshot?.params?.CityName || '' };
     this.refreshEmpList();
   }
 
@@ -26,7 +37,7 @@ export class ShowEmpComponent implements OnInit {
       RestaurantName:"",
       City:"",
       DateOfJoining:"",
-      PhotoFileName:"anonymous.png"
+      PhotoFileName:""
     }
     this.ModalTitle="Add Restaurant";
     this.ActivateAddEditEmpComp=true;
@@ -57,8 +68,26 @@ export class ShowEmpComponent implements OnInit {
 
   refreshEmpList(){
     this.service.getEmpList().subscribe(data=>{
-      this.RestaurantList=data;
+      this._RestaurantList = data;
+      this.RestaurantList=this.applyFilters(data);
     });
   }
 
+  applyFilters(data) {
+    console.log(this.appliedFilters, data);
+    if(this.appliedFilters) {
+      if(this.appliedFilters?.CityName) {
+        data = data?.filter(restaurant => {
+          return restaurant?.City && restaurant.City.includes(this.appliedFilters?.CityName)
+        });
+      }
+
+      if (typeof this.appliedFilters.petFriendly !== 'undefined' && this.appliedFilters.petFriendly === true) {
+        data = data?.filter(restaurant => {
+          return (this.appliedFilters.petFriendly === true && restaurant.PetFriendly === 'Yes')
+        });
+      }
+    }
+    return data;
+  }
 }

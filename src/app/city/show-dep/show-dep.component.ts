@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import {SharedService} from 'src/app/shared.service';
 
 @Component({
@@ -8,7 +9,10 @@ import {SharedService} from 'src/app/shared.service';
 })
 export class ShowDepComponent implements OnInit {
 
-  constructor(private service:SharedService) { }
+  constructor(
+    private service:SharedService,
+    public router: Router
+  ) { }
 
   CityList:any=[];
 
@@ -16,7 +20,7 @@ export class ShowDepComponent implements OnInit {
   ActivateAddEditDepComp:boolean=false;
   dep:any;
 
-  CityIdFilter:string="";
+  CityIdFilter :string="";
   CityNameFilter:string="";
   CityListWithoutFilter:any=[];
 
@@ -86,4 +90,9 @@ export class ShowDepComponent implements OnInit {
     })
   }
 
+
+  goToRestaurantsByCity(city: any) {
+    console.log(city);
+    this.router.navigate(['restaurant', { CityName: city.CityName }])
+  }
 }
